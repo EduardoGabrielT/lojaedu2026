@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lojas Edu — Achou, levou.</title>
+  <meta name="description" content="Calçados, roupas, eletrônicos e utensílios com entrega rápida e atendimento direto no WhatsApp." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-logo">Lojas <span>Edu</span></div>
+    <button class="carrinho-btn" onclick="abrirCarrinho()" aria-label="Abrir carrinho">
+      🛒
+      <span class="carrinho-contador" id="carrinho-contador">0</span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Achou, levou.</h1>
+    <p>Calçados, roupas, eletrônicos e utensílios em um só lugar. Entrega rápida e atendimento direto no WhatsApp.</p>
+    <a href="#produtos" class="hero-cta">Ver Ofertas</a>
+    <div class="hero-badge">🚚 Frete grátis acima de R$ 199</div>
+  </section>
+
+  <!-- CATEGORIAS -->
+  <section class="secao">
+    <h2 class="secao-titulo">Categorias</h2>
+    <div class="categorias">
+      <a href="#" class="categoria" onclick="filtrarPorCategoria('calcados'); return false;">
+        <div class="categoria-icone">👟</div>
+        <div class="categoria-nome">Calçados</div>
+      </a>
+      <a href="#" class="categoria" onclick="filtrarPorCategoria('vestuario'); return false;">
+        <div class="categoria-icone">👕</div>
+        <div class="categoria-nome">Vestuário</div>
+      </a>
+      <a href="#" class="categoria" onclick="filtrarPorCategoria('eletronicos'); return false;">
+        <div class="categoria-icone">📱</div>
+        <div class="categoria-nome">Eletrônicos</div>
+      </a>
+      <a href="#" class="categoria" onclick="filtrarPorCategoria('utensilios'); return false;">
+        <div class="categoria-icone">🍽️</div>
+        <div class="categoria-nome">Utensílios</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section class="secao" id="produtos">
+    <h2 class="secao-titulo">Mais Vendidos</h2>
+    <p class="secao-subtitulo">Selecionados pra você</p>
+
+    <div class="busca-container">
+      <input
+        type="text"
+        id="busca"
+        class="busca-input"
+        placeholder="🔍 Buscar produto..."
+        oninput="filtrarProdutos(this.value)"
+      />
+    </div>
+
+    <div class="produtos-grid" id="produtos-grid"></div>
+  </section>
+
+  <!-- BENEFÍCIOS -->
+  <section class="beneficios">
+    <div>
+      <div class="beneficio-icone">🚚</div>
+      <div class="beneficio-texto">Entrega Rápida</div>
+    </div>
+    <div>
+      <div class="beneficio-icone">🔒</div>
+      <div class="beneficio-texto">Compra Segura</div>
+    </div>
+    <div>
+      <div class="beneficio-icone">↩️</div>
+      <div class="beneficio-texto">Troca em 7 dias</div>
+    </div>
+  </section>
+
+  <!-- PORTFÓLIO -->
+  <section class="secao-portfolio">
+    <h2>💼 Projeto pessoal de Eduardo</h2>
+    <p>Loja virtual completa com carrinho persistente, integração WhatsApp e design responsivo mobile-first.</p>
+    <div class="tech-badges">
+      <span class="tech-badge">HTML5</span>
+      <span class="tech-badge">CSS3</span>
+      <span class="tech-badge">JavaScript</span>
+      <span class="tech-badge">Mobile First</span>
+      <span class="tech-badge">API WhatsApp</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <h3>Lojas Edu</h3>
+    <p>contato@lojasedu.com.br</p>
+    <div class="footer-redes">
+      <a href="#" aria-label="Instagram">📷</a>
+      <a href="#" aria-label="Facebook">📘</a>
+      <a href="https://wa.me/55SEUNUMERO" aria-label="WhatsApp">💬</a>
+    </div>
+    <p style="margin-top: 16px; font-size: 11px;">© 2024 Lojas Edu — Projeto pessoal / demonstração</p>
+  </footer>
+
+  <!-- WHATSAPP FLUTUANTE -->
+  <a href="https://wa.me/55SEUNUMERO" class="whatsapp-float" aria-label="Falar no WhatsApp" target="_blank">
+    💬
+  </a>
+
+  <!-- MODAL DO CARRINHO -->
+  <div class="carrinho-modal" id="carrinho-modal">
+    <div class="carrinho-conteudo">
+      <div class="carrinho-header">
+        <h2>Seu Carrinho</h2>
+        <button class="carrinho-fechar" onclick="fecharCarrinho()" aria-label="Fechar">✕</button>
+      </div>
+      <div id="carrinho-itens"></div>
+      <div id="carrinho-rodape"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

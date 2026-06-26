@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tênis Esportivo Pro — Lojas Edu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="navbar-logo">Lojas <span>Edu</span></a>
+    <button class="carrinho-btn" onclick="abrirCarrinho()">
+      🛒
+      <span class="carrinho-contador" id="carrinho-contador">0</span>
+    </button>
+  </nav>
+
+  <div class="produto-detalhe">
+    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Tênis Esportivo Pro" class="produto-detalhe-img" />
+
+    <div class="produto-detalhe-info">
+      <h1>Tênis Esportivo Pro</h1>
+      <div class="produto-avaliacao">
+        ⭐⭐⭐⭐⭐ <small>(37 avaliações)</small>
+      </div>
+      <div class="produto-detalhe-preco">R$ 189,90</div>
+      <p class="produto-detalhe-desc">
+        Tênis confortável para o dia a dia. Solado antiderrapante, material respirável e design moderno. Ideal para corrida, caminhada ou uso casual.
+      </p>
+      <button class="btn-grande" onclick="adicionarCarrinho(1)">
+        🛒 Adicionar ao Carrinho
+      </button>
+    </div>
+  </div>
+
+  <a href="https://wa.me/55SEUNUMERO" class="whatsapp-float">💬</a>
+
+  <div class="carrinho-modal" id="carrinho-modal">
+    <div class="carrinho-conteudo">
+      <div class="carrinho-header">
+        <h2>Seu Carrinho</h2>
+        <button class="carrinho-fechar" onclick="fecharCarrinho()">✕</button>
+      </div>
+      <div id="carrinho-itens"></div>
+      <div id="carrinho-rodape"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
