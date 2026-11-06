@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "nome": "Tênis Esportivo Pro",
+    "preco": 189.90,
+    "precoAntigo": 249.90,
+    "imagem": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80",
+    "categoria": "calcados"
+  },
+  {
+    "id": 2,
+    "nome": "Camiseta Básica Premium",
+    "preco": 49.90,
+    "precoAntigo": 79.90,
+    "imagem": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80",
+    "categoria": "vestuario"
+  },
+  {
+    "id": 3,
+    "nome": "Fone Bluetooth sem Fio",
+    "preco": 129.90,
+    "precoAntigo": 199.90,
+    "imagem": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80",
+    "categoria": "eletronicos"
+  },
+  {
+    "id": 4,
+    "nome": "Jogo de Xícaras Cerâmica",
+    "preco": 89.90,
+    "precoAntigo": 119.90,
+    "imagem": "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80",
+    "categoria": "utensilios"
+  },
+  {
+    "id": 5,
+    "nome": "Smartwatch Fitness",
+    "preco": 299.90,
+    "precoAntigo": 449.90,
+    "imagem": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
+    "categoria": "eletronicos"
+  },
+  {
+    "id": 6,
+    "nome": "Mochila Urbana Antifurto",
+    "preco": 159.90,
+    "precoAntigo": 229.90,
+    "imagem": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&q=80",
+    "categoria": "vestuario"
+  },
+  {
+    "id": 7,
+    "nome": "Sandália Confortável",
+    "preco": 79.90,
+    "precoAntigo": 119.90,
+    "imagem": "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=400&q=80",
+    "categoria": "calcados"
+  },
+  {
+    "id": 8,
+    "nome": "Conjunto de Panelas",
+    "preco": 249.90,
+    "precoAntigo": 349.90,
+    "imagem": "https://images.unsplash.com/photo-1584990347449-a4f9b8c5d7b3?w=400&q=80",
+    "categoria": "utensilios"
+  }
+]

@@ -1,75 +1,8 @@
 // ===== CONFIGURAÇÃO =====
 const WHATSAPP_NUMERO = '55SEUNUMERO'; // Substitua pelo seu número (formato: 5511999999999)
 
-// ===== CATÁLOGO DE PRODUTOS =====
-const produtos = [
-  {
-    id: 1,
-    nome: "Tênis Esportivo Pro",
-    preco: 189.90,
-    precoAntigo: 249.90,
-    imagem: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80",
-    categoria: "calcados"
-  },
-  {
-    id: 2,
-    nome: "Camiseta Básica Premium",
-    preco: 49.90,
-    precoAntigo: 79.90,
-    imagem: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80",
-    categoria: "vestuario"
-  },
-  {
-    id: 3,
-    nome: "Fone Bluetooth sem Fio",
-    preco: 129.90,
-    precoAntigo: 199.90,
-    imagem: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80",
-    categoria: "eletronicos"
-  },
-  {
-    id: 4,
-    nome: "Jogo de Xícaras Cerâmica",
-    preco: 89.90,
-    precoAntigo: 119.90,
-    imagem: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80",
-    categoria: "utensilios"
-  },
-  {
-    id: 5,
-    nome: "Smartwatch Fitness",
-    preco: 299.90,
-    precoAntigo: 449.90,
-    imagem: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
-    categoria: "eletronicos"
-  },
-  {
-    id: 6,
-    nome: "Mochila Urbana Antifurto",
-    preco: 159.90,
-    precoAntigo: 229.90,
-    imagem: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&q=80",
-    categoria: "vestuario"
-  },
-  {
-    id: 7,
-    nome: "Sandália Confortável",
-    preco: 79.90,
-    precoAntigo: 119.90,
-    imagem: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=400&q=80",
-    categoria: "calcados"
-  },
-  {
-    id: 8,
-    nome: "Conjunto de Panelas",
-    preco: 249.90,
-    precoAntigo: 349.90,
-    imagem: "https://images.unsplash.com/photo-1584990347449-a4f9b8c5d7b3?w=400&q=80",
-    categoria: "utensilios"
-  }
-];
-
-// ===== ESTADO DO CARRINHO =====
+// ===== ESTADO GLOBAL =====
+let produtos = [];
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 // ===== HELPERS =====
@@ -84,6 +17,23 @@ function gerarEstrelas() {
 
 function gerarAvaliacoes() {
   return Math.floor(Math.random() * 50) + 10;
+}
+
+// ===== CARREGAR PRODUTOS DA "API" (JSON) =====
+async function carregarProdutos() {
+  const grid = document.getElementById('produtos-grid');
+  grid.innerHTML = '<p class="mensagem-vazia">⏳ A carregar produtos...</p>';
+
+  try {
+    const resposta = await fetch('./produtos.json');
+    if (!resposta.ok) throw new Error('Erro ao carregar o catálogo.');
+    
+    produtos = await resposta.json();
+    renderizarProdutos(produtos);
+  } catch (erro) {
+    console.error(erro);
+    grid.innerHTML = '<p class="mensagem-vazia">❌ Erro ao carregar os produtos. Tente novamente mais tarde.</p>';
+  }
 }
 
 // ===== RENDERIZAR PRODUTOS =====
@@ -140,6 +90,8 @@ function filtrarPorCategoria(categoria) {
 // ===== CARRINHO =====
 function adicionarCarrinho(id) {
   const produto = produtos.find(p => p.id === id);
+  if (!produto) return;
+  
   const itemExistente = carrinho.find(item => item.id === id);
 
   if (itemExistente) {
@@ -170,6 +122,21 @@ function removerCarrinho(id) {
   renderizarCarrinho();
 }
 
+function alterarQuantidade(id, delta) {
+  const item = carrinho.find(p => p.id === id);
+  if (!item) return;
+
+  item.quantidade += delta;
+
+  if (item.quantidade <= 0) {
+    carrinho = carrinho.filter(p => p.id !== id);
+  }
+
+  salvarCarrinho();
+  atualizarContador();
+  renderizarCarrinho();
+}
+
 function atualizarContador() {
   const total = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
   document.getElementById('carrinho-contador').textContent = total;
@@ -187,17 +154,16 @@ function renderizarCarrinho() {
 
   container.innerHTML = carrinho.map(item => {
     const subtotal = item.preco * item.quantidade;
-    const detalheQtd = item.quantidade > 1
-      ? `<small>${item.quantidade}x R$ ${formatarPreco(item.preco)}</small>`
-      : '';
     return `
       <div class="carrinho-item">
         <img src="${item.imagem}" alt="${item.nome}" class="carrinho-item-img" />
         <div class="carrinho-item-info">
           <div class="carrinho-item-nome">${item.nome}</div>
-          <div class="carrinho-item-preco">
-            R$ ${formatarPreco(subtotal)}
-            ${detalheQtd}
+          <div class="carrinho-item-preco">R$ ${formatarPreco(subtotal)}</div>
+          <div class="carrinho-item-controles">
+            <button onclick="alterarQuantidade(${item.id}, -1)" aria-label="Diminuir quantidade">-</button>
+            <span>${item.quantidade}</span>
+            <button onclick="alterarQuantidade(${item.id}, 1)" aria-label="Aumentar quantidade">+</button>
           </div>
         </div>
         <button class="carrinho-item-remover" onclick="removerCarrinho(${item.id})" aria-label="Remover">🗑️</button>
@@ -264,5 +230,5 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ===== INICIALIZAÇÃO =====
-renderizarProdutos(produtos);
+carregarProdutos();
 atualizarContador();
